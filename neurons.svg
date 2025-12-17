@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="flare" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff3b3b" stop-opacity="0.45"/>
+      <stop offset="50%" stop-color="#ff3b3b" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#ff3b3b" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="18" result="b"/>
+      <feBlend in="SourceGraphic" in2="b" mode="screen"/>
+    </filter>
+  </defs>
+
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.12">
+    <path d="M50 200 C200 120, 320 80, 500 120 S820 200, 1000 160" stroke="#ff3b3b" stroke-width="2"/>
+    <path d="M60 300 C220 260, 360 200, 520 240 S840 320, 1100 300" stroke="#ff3b3b" stroke-width="1.6"/>
+    <path d="M300 40 C380 180, 520 200, 660 140 S980 40, 1260 120" stroke="#ffd1d1" stroke-width="1.2" stroke-opacity="0.06"/>
+    <path d="M1300 600 C1180 520, 1040 480, 900 520 S620 640, 400 700" stroke="#ff3b3b" stroke-width="1.4"/>
+    <path d="M200 700 C340 660, 480 720, 620 680 S900 600, 1200 640" stroke="#ff3b3b" stroke-width="1"/>
+  </g>
+
+  <g filter="url(#blur)">
+    <circle cx="300" cy="160" r="140" fill="url(#flare)" />
+    <circle cx="1200" cy="420" r="180" fill="url(#flare)" />
+    <circle cx="900" cy="120" r="90" fill="url(#flare)" />
+  </g>
+
+  <g fill="none" stroke="#ffb3b3" stroke-opacity="0.06">
+    <path d="M1400 50 C1320 120, 1200 60, 1100 90" stroke-width="0.8"/>
+    <path d="M200 480 C260 420, 360 460, 460 430" stroke-width="0.8"/>
+  </g>
+</svg>
