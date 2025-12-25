@@ -4,13 +4,28 @@ document.addEventListener('DOMContentLoaded',function(){
 
   const menu = document.querySelector('.sidebar');
   const toggle = document.getElementById('menuToggle');
+  let sidebarPinned = false;
   if(toggle && menu){
-    toggle.addEventListener('click',()=>menu.classList.toggle('open'));
+    toggle.setAttribute('aria-expanded', menu.classList.contains('open') ? 'true' : 'false');
+    toggle.addEventListener('click', ()=>{
+      const isOpen = menu.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      sidebarPinned = (window.innerWidth > 900) ? isOpen : false;
+    });
     // close when clicking outside on small screens
-    document.addEventListener('click',e=>{
+    document.addEventListener('click', e=>{
       if(window.innerWidth<=900 && menu.classList.contains('open')){
-        if(!menu.contains(e.target) && e.target!==toggle) menu.classList.remove('open');
+        if(!menu.contains(e.target) && e.target!==toggle){
+          menu.classList.remove('open');
+          toggle.setAttribute('aria-expanded','false');
+        }
       }
+    });
+    // close mobile sidebar when a nav link is clicked
+    document.querySelectorAll('.nav-link').forEach(a=>{
+      a.addEventListener('click', ()=>{
+        if(window.innerWidth <= 900){ menu.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); }
+      });
     });
   }
 
@@ -70,15 +85,7 @@ document.addEventListener('DOMContentLoaded',function(){
 
   // Auto-show sidebar when cursor is near left edge (desktop only)
   const sidebar = document.querySelector('.sidebar');
-  let sidebarPinned = false; // if user toggles, respect manual toggle
   let initialTimeout = null; // timeout used to hide sidebar after initial show
-  if(toggle){
-    toggle.addEventListener('click', ()=>{
-      // treat manual toggle as pinning until user clicks again
-      sidebarPinned = sidebar.classList.contains('open');
-      if(initialTimeout){ clearTimeout(initialTimeout); initialTimeout = null; }
-    });
-  }
 
   let hideTimeout = null;
   function tryShowSidebar(x){

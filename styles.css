@@ -55,6 +55,11 @@ body{margin:0;font-family:Inter,Segoe UI,Arial;background:
 .btn.outline{border:1px solid rgba(224,49,49,0.9);color:var(--red-bright);background:transparent}
 
 .section{padding:28px 48px;border-top:1px solid rgba(255,255,255,0.02)}
+.section h3{margin-top:16px;margin-bottom:8px;font-size:18px;color:var(--white)}
+.resume-list{list-style:none;padding:0;margin:6px 0 0 0}
+.resume-list li{padding:8px 0;border-left:3px solid transparent}
+.resume-list li strong{color:var(--white);font-weight:700}
+.muted{color:var(--muted);font-size:13px;margin-top:6px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:16px}
 .card{background:linear-gradient(180deg,#0b0b0b,#070606);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);transition:transform .18s,box-shadow .18s}
 .card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(224,49,49,0.06)}
@@ -99,5 +104,17 @@ body{margin:0;font-family:Inter,Segoe UI,Arial;background:
   /* make sure main content fills available space when sidebar hidden */
   .app{padding-left:0}
   .main{margin-left:0}
+}
+
+/* Print styles for resume */
+@media print{
+  :root{background:transparent}
+  body{background:transparent;color:#000;font-family:Arial,Helvetica,sans-serif}
+  .sidebar, .menu-btn, .nav, .card, .animated-bg, .cursor-dot, .cursor-ring{display:none !important}
+  .main{margin:0;flex:1}
+  .section{padding:0;border:none}
+  .lead{color:#333}
+  .resume-list li{border-left:none;padding:6px 0}
+  .footer{display:block;color:#333}
 }
 

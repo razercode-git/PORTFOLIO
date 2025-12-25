@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dementia Detection Tool — Razercode</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="profile">
+          <div class="avatar" aria-hidden="true">AB</div>
+          <h1 class="name">RAZERCODE</h1>
+          <p class="role">BUILDER | TECH ENTHUSIAST</p>
+        </div>
+        <div class="sidebar-about">
+          <p class="full-name">MUZAMMIL RAZA</p>
+          <p class="bio">I'm passionate about crafting accessible, high-performance front-end experiences. Currently learning modern JS frameworks and advanced CSS techniques to turn ideas into delightful interfaces.</p>
+          <div class="socials">
+            <a href="https://www.linkedin.com/in/muzammil-raza-5699a3391" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
+            <a href="https://x.com/RazerCode" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
+            <a href="https://github.com/razercode-git" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <button id="menuToggle" class="menu-btn" aria-label="Toggle menu">☰</button>
+          <nav class="nav">
+            <a class="nav-link" href="index.html">About</a>
+            <a class="nav-link" href="resume.html">Resume</a>
+            <a class="nav-link" href="portfolio.html">Portfolio</a>
+            <a class="nav-link" href="contact.html">Contact</a>
+          </nav>
+        </header>
+
+        <section class="section">
+          <h2>Dementia Detection Tool</h2>
+          <p class="lead">A web-based AI prototype to detect early-stage dementia from short cognitive tests and questionnaire responses. Built during the Smart India Hackathon (SIH) as a proof-of-concept to help clinicians with early screening.</p>
+
+          <h3>Overview</h3>
+          <p>This project collects simple cognitive test inputs (memory tasks, pattern recognition, timed tasks) and demographic/contextual questions, then runs a lightweight model inference to provide a risk-score and suggested next steps. The UI focuses on accessibility, clear instructions, and privacy — no personally-identifiable data is stored on the public demo.</p>
+
+          <h3>Model &amp; Technical Details</h3>
+          <ul class="resume-list">
+            <li><strong>Model:</strong> Lightweight neural network trained on selected cognitive features (proof-of-concept; not a clinical diagnostic).</li>
+            <li><strong>Backend:</strong> Flask app serving a TensorFlow model for inference.</li>
+            <li><strong>Frontend:</strong> HTML/CSS/JavaScript for tests, results UI and accessibility features.</li>
+            <li><strong>Privacy & Ethics:</strong> Designed as a screening aid only; users are encouraged to consult clinicians for interpretation.</li>
+          </ul>
+
+          <h3>SIH Entry</h3>
+          <p>Presented as an SIH prototype focusing on early detection and community screening. The submission included a demo, a short validation plan, and notes on responsible deployment.</p>
+
+          <h3>Try It / Code</h3>
+          <p>If you'd like a demo or access to the code, replace the placeholder link below with your repo or contact details.</p>
+          <p><a class="btn primary" href="https://github.com/razercode-git" target="_blank" rel="noopener noreferrer">View Repo (placeholder)</a></p>
+
+          <h3>Notes</h3>
+          <p class="muted">This is a proof-of-concept built for competition and research; any real-world deployment requires clinical validation, data governance, and ethical review.</p>
+
+          <p class="cta-row"><a class="btn outline" href="portfolio.html">Back to Portfolio</a></p>
+        </section>
+
+        <footer class="footer">© <span id="year"></span> Razercode — Built with Love &amp; Passion </footer>
+      </main>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
