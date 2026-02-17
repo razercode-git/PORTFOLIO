@@ -1,184 +1,49 @@
-// ============================================
-// NAVBAR MOBILE MENU TOGGLE
-// ============================================
+// Navbar mobile menu toggle
+document.getElementById('menu-toggle').addEventListener('click', function() {
+    document.getElementById('navbar').classList.toggle('is-active');
+});
 
-const navToggle = document.getElementById('navToggle');
-const navMenu = document.getElementById('navMenu');
-
-if (navToggle && navMenu) {
-	navToggle.addEventListener('click', () => {
-		navToggle.classList.toggle('active');
-		navMenu.classList.toggle('open');
-	});
-
-	// Close menu when a link is clicked
-	const navLinks = navMenu.querySelectorAll('.nav-link');
-	navLinks.forEach((link) => {
-		link.addEventListener('click', () => {
-			navToggle.classList.remove('active');
-			navMenu.classList.remove('open');
-		});
-	});
-
-	// Close menu when clicking outside
-	document.addEventListener('click', (e) => {
-		if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
-			navToggle.classList.remove('active');
-			navMenu.classList.remove('open');
-		}
-	});
-}
-
-// ============================================
-// SMOOTH SCROLL & ACTIVE NAV LINK
-// ============================================
-
-const updateActiveNavLink = () => {
-	const sections = document.querySelectorAll('section');
-	const navLinks = document.querySelectorAll('.nav-link');
-
-	window.addEventListener('scroll', () => {
-		let current = '';
-		sections.forEach((section) => {
-			const sectionTop = section.offsetTop;
-			const sectionHeight = section.clientHeight;
-			if (pageYOffset >= sectionTop - 200) {
-				current = section.getAttribute('id');
-			}
-		});
-
-		navLinks.forEach((link) => {
-			link.classList.remove('active');
-			if (link.getAttribute('href').includes(current)) {
-				link.classList.add('active');
-			}
-		});
-		});
-};
-
-updateActiveNavLink();
-
-// ============================================
-// INTERSECTION OBSERVER FOR ANIMATIONS
-// ============================================
-
-const observerOptions = {
-	threshold: 0.1,
-	rootMargin: '0px 0px -50px 0px',
-};
-
+// Intersection Observer
 const observer = new IntersectionObserver((entries) => {
-	entries.forEach((entry) => {
-		if (entry.isIntersecting) {
-			entry.target.classList.add('visible');
-			observer.unobserve(entry.target);
-		}
-	});
-}, observerOptions);
-
-// Observe elements with reveal class
-document.querySelectorAll('.reveal').forEach((el) => {
-	observer.observe(el);
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        } else {
+            entry.target.classList.remove('visible');
+        }
+    });
 });
 
-// ============================================
-// SCROLL-TRIGGERED ANIMATIONS
-// ============================================
+document.querySelectorAll('.animate-on-scroll').forEach((element) => {
+    observer.observe(element);
+});
 
-const handleScrollAnimations = () => {
-	const elements = document.querySelectorAll('[data-animate]');
-
-	elements.forEach((element) => {
-		const elementTop = element.getBoundingClientRect().top;
-		const elementBottom = element.getBoundingClientRect().bottom;
-
-		if (elementTop < window.innerHeight && elementBottom > 0) {
-			element.classList.add('animate-in');
-		}
-	});
+// Parallax Effects
+const parallax = (event) => {
+    const layers = document.querySelectorAll('.parallax-layer');
+    layers.forEach((layer) => {
+        const depth = layer.getAttribute('data-depth');
+        const movement = (event.clientY * depth) / 100;
+        layer.style.transform = `translateY(${movement}px)`;
+    });
 };
+window.addEventListener('mousemove', parallax);
 
-window.addEventListener('scroll', handleScrollAnimations);
-window.addEventListener('load', handleScrollAnimations);
-
-// ============================================
-// PARALLAX EFFECT FOR GRADIENT ORBS
-// ============================================
-
-const parallaxOrbs = () => {
-	const orbs = document.querySelectorAll('.gradient-orb');
-
-	window.addEventListener('mousemove', (e) => {
-		const mouseX = e.clientX / window.innerWidth;
-		const mouseY = e.clientY / window.innerHeight;
-
-		orbs.forEach((orb, index) => {
-			const speed = (index + 1) * 20;
-			const x = mouseX * speed;
-			const y = mouseY * speed;
-
-			orb.style.transform = `translate(${x}px, ${y}px)`;
-		});
-		});
+// Scroll Animations
+const scrollElements = document.querySelectorAll('.scroll-animation');
+const elementInView = (el, ratio = 0) => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                el.classList.add('in-view');
+                observer.unobserve(el);
+            }
+        });
+    }, {
+        threshold: ratio
+    });
+    observer.observe(el);
 };
-
-parallaxOrbs();
-
-// ============================================
-// SET CURRENT YEAR IN FOOTER
-// ============================================
-
-const yearSpan = document.getElementById('year');
-if (yearSpan) {
-	yearSpan.textContent = new Date().getFullYear();
-}
-
-// ============================================
-// PAGE TRANSITION LOADING ANIMATION
-// ============================================
-
-document.addEventListener('DOMContentLoaded', () => {
-	document.body.style.opacity = '1';
-	document.body.classList.add('loaded');
+scrollElements.forEach((el) => {
+    elementInView(el);
 });
-
-// Fade out page on link click (for internal navigation)
-document.querySelectorAll('a[href^="/"], a[href$=".html"]').forEach((link) => {
-	link.addEventListener('click', function (e) {
-		const href = this.getAttribute('href');
-
-		// Don't fade out for external links or anchors
-		if (href && !href.startsWith('http') && !href.startsWith('mailto:') && !href.startsWith('#')) {
-			e.preventDefault();
-
-			// Check if it's the same page
-			if (!href.includes(window.location.pathname.split('/').pop())) {
-				document.body.style.opacity = '0';
-				document.body.style.transition = 'opacity 0.3s ease';
-
-				setTimeout(() => {
-					window.location.href = href;
-				}, 300);
-			} else {
-				window.location.href = href;
-			}
-		}
-	});
-});
-
-// ============================================
-// HERO SCROLL INDICATOR
-// ============================================
-
-const scrollIndicator = document.querySelector('.scroll-indicator');
-if (scrollIndicator) {
-	window.addEventListener('scroll', () => {
-		if (window.scrollY > 100) {
-			scrollIndicator.style.opacity = '0';
-			scrollIndicator.style.pointerEvents = 'none';
-		} else {
-			scrollIndicator.style.opacity = '1';
-			scrollIndicator.style.pointerEvents = 'auto';
-		}
-	});
-}
